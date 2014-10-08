@@ -1,0 +1,10 @@
+# Writeup
+@Authors: Clint Ascencio, Tim Sherlock, Julian Sia
+@Date: 9/23/14
+
+To run our script that builds our panorama simply run "python builder_script.py," constructing the panorama "mypanos.jpg" in the directory in which this script is executed. 
+
+To determine the homography between images, we used SIFT to find key points, given its fairly good performance in the light of scaling and rotation and handles occlusion and image cluttering quite well.
+BFMatcher was recommended by Dr. Klinger, as a good toolkist to calculate distance between the descriptors produced from SIFT, using the l^2 norm as the distance measure that the K-nearest neighbors algorithm used to do feature matching.  To filter out matches, we used Lowe's ratio test, which is commonly used.  After finding our filtered matches set, we formed the source and destination point sets and then passed them to findHomography which found our homography matrix.
+
+Our image generation script generates a 3 image panorama of the outside scenery of the GDC, our second home.  We stitched the middle and left images and then the middle and right images using our defined homography, warp_image, and create_mosaic functions.  
